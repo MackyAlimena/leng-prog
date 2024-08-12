@@ -30,18 +30,26 @@ insertionSort [] = []
 insertionSort (x:xs) = insert x (insertionSort xs)
 
 binaryToDecimal :: [Int] -> Int
-binaryToDecimal = error "Implement it"
+binaryToDecimal [] = 0
+binaryToDecimal (x:xs) = x * 2 ^ (length xs -1) + binaryToDecimal xs
+
+reverseList :: [Int] -> [Int]
+reverseList [] = []
+reverseList (x:xs) = reverseList xs ++ [x]
     
 toDecimal :: Int -> [Int] -> Int
-toDecimal = error "Implement it"
+toDecimal _ [] = 0
+toDecimal base (x:xs) = x * base ^ (length xs) + toDecimal base xs
     
-toDec::Int -> String -> Int
-toDec base s =  = error "Implement it"
+import Data.Char (digitToInt)
+
+toDec :: Int -> String -> Int
+toDec base s = toDecimal base (map digitToInt s)
 
 -- Same as `toDec` But use a list comprehension
 
 decimal::Int -> String -> Int
-decimal  = error "Implement it"
+decimal base s = sum [digitToInt x * base ^ i | (x, i) <- zip (reverse s) [0..]]
 
 firsts::[a] -> [[a]]
 firsts = error "Implement it"
