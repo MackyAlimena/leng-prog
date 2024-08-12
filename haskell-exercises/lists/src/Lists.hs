@@ -23,10 +23,11 @@ difference:: [Int] -> [Int] -> [Int]
 difference xs ys = [x | x <- xs, not (member x ys)]
 
 insert:: Int -> [Int] -> [Int]
-insert = error "Implement it"
+insert a xs = [x | x <- xs, x < a] ++ [a] ++ [x | x <- xs, x >= a]
 
 insertionSort :: [Int] -> [Int]
-insertionSort = error "Implement it"
+insertionSort [] = []
+insertionSort (x:xs) = insert x (insertionSort xs)
 
 binaryToDecimal :: [Int] -> Int
 binaryToDecimal = error "Implement it"
