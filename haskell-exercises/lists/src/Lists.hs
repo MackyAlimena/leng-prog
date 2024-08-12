@@ -16,13 +16,11 @@ union (x:xs) ys
   | member x ys = union xs ys
   | otherwise   = x : union xs ys
 
--- Remove Implementations, from, here on
-
 intersection:: [Int] -> [Int] -> [Int]
-intersection = error "Implement it"
+intersection xs ys = [x | x <- xs, member x ys]
 
 difference:: [Int] -> [Int] -> [Int]
-difference  = error "Implement it"
+difference xs ys = [x | x <- xs, not (member x ys)]
 
 insert:: Int -> [Int] -> [Int]
 insert = error "Implement it"
