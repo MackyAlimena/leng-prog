@@ -1,6 +1,6 @@
 module Lists (member, union, intersection, difference,
               insert, insertionSort,
-              binaryToDecimal, toDecimal, toDec, decimal) where
+              binaryToDecimal, toDecimal, toDec, decimal, firsts) where
   
 import Data.Char(digitToInt)  
 
@@ -46,8 +46,14 @@ toDec base s = toDecimal base (map digitToInt s)
 decimal::Int -> String -> Int
 decimal base s = sum [digitToInt x * base ^ i | (x, i) <- zip (reverse s) [0..]]
 
---firsts::[a] -> [[a]]
---firsts = error "Implement it"
+--using list comprehension
+firsts :: [a] -> [[a]]
+firsts xs = [take n xs | n <- [1..length xs]]
+
+--using recursion
+firsts :: [a] -> [[a]]
+firsts [] = []
+firsts xs = firsts (init xs) ++ [xs]
 
 -- Given two String that represents numbers in binary implement the 'binaryAdd' function
 -- DO NOT USE a predefined '+' operation
