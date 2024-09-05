@@ -1,7 +1,6 @@
 module Lists (member, union, intersection, difference,
               insert, insertionSort,
-              binaryToDecimal, toDecimal, toDec, decimal,
-              binaryAdd) where
+              binaryToDecimal, toDecimal, toDec, decimal) where
   
 import Data.Char(digitToInt)  
 
@@ -30,18 +29,14 @@ insertionSort [] = []
 insertionSort (x:xs) = insert x (insertionSort xs)
 
 binaryToDecimal :: [Int] -> Int
-binaryToDecimal [] = 0
-binaryToDecimal (x:xs) = x * 2 ^ (length xs -1) + binaryToDecimal xs
+binaryToDecimal xs = sum [x * 2 ^ i | (x, i) <- zip (reverse xs) [0..]]
 
 reverseList :: [Int] -> [Int]
 reverseList [] = []
 reverseList (x:xs) = reverseList xs ++ [x]
-    
+
 toDecimal :: Int -> [Int] -> Int
-toDecimal _ [] = 0
-toDecimal base (x:xs) = x * base ^ (length xs) + toDecimal base xs
-    
-import Data.Char (digitToInt)
+toDecimal base xs = sum [x * base ^ i | (x, i) <- zip (reverse xs) [0..]]
 
 toDec :: Int -> String -> Int
 toDec base s = toDecimal base (map digitToInt s)
@@ -51,11 +46,11 @@ toDec base s = toDecimal base (map digitToInt s)
 decimal::Int -> String -> Int
 decimal base s = sum [digitToInt x * base ^ i | (x, i) <- zip (reverse s) [0..]]
 
-firsts::[a] -> [[a]]
-firsts = error "Implement it"
+--firsts::[a] -> [[a]]
+--firsts = error "Implement it"
 
 -- Given two String that represents numbers in binary implement the 'binaryAdd' function
 -- DO NOT USE a predefined '+' operation
 
-binaryAdd::String -> String -> String
-binaryAdd  = error "Implement it"
+--binaryAdd::String -> String -> String
+--binaryAdd  = error "Implement it"
