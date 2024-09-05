@@ -88,16 +88,17 @@ main = hspec $ do
     it "String Base 16" $ do 
       decimal 16 "1F" `shouldBe` 31
       
+
   describe "firsts" $ do
-    it "[1, 2, 5]" $ do
-      firsts [1, 3, 5] `shouldBe` [[1], [1, 3], [1, 3, 5]]
-    it "Hello" $ do          
-      firsts "Hello" `shouldBe` ["H", "He", "Hel", "Hell", "Hello"]
-  describe "binary add" $ do    
-    it "2 + 1 = 3" $ do 
-      binaryAdd "11" "1"  `shouldBe` "100"
-    it "15 + 3 = 18" $ do 
-      binaryAdd "1111" "11"  `shouldBe` "10010"
-    it "\"\" + \"\" = \"0\"" $ do 
-          binaryAdd "" ""  `shouldBe` "0"  
-              
+   it "[1, 2, 5]" $ do
+     firsts [1, 3, 5] `shouldBe` [[1], [1, 3], [1, 3, 5]]
+   it "Hello" $ do
+     firsts "Hello" `shouldBe` ["H", "He", "Hel", "Hell", "Hello"]
+
+  describe "binary add" $ do
+   it "2 + 1 = 3" $ do
+     binaryAdd "11" "1"  `shouldBe` "100"
+   it "15 + 3 = 18" $ do
+     binaryAdd "1111" "11"  `shouldBe` "10010"
+   it "\"\" + \"\" = \"0\"" $ do
+         binaryAdd "" ""  `shouldBe` "0"

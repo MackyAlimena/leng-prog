@@ -1,6 +1,6 @@
 module Lists (member, union, intersection, difference,
               insert, insertionSort,
-              binaryToDecimal, toDecimal, toDec, decimal, firsts) where
+              binaryToDecimal, toDecimal, toDec, decimal, firsts, binaryAdd) where
   
 import Data.Char(digitToInt)  
 
@@ -50,13 +50,28 @@ decimal base s = sum [digitToInt x * base ^ i | (x, i) <- zip (reverse s) [0..]]
 firsts :: [a] -> [[a]]
 firsts xs = [take n xs | n <- [1..length xs]]
 
---using recursion
-firsts :: [a] -> [[a]]
-firsts [] = []
-firsts xs = firsts (init xs) ++ [xs]
+
 
 -- Given two String that represents numbers in binary implement the 'binaryAdd' function
 -- DO NOT USE a predefined '+' operation
 
---binaryAdd::String -> String -> String
---binaryAdd  = error "Implement it"
+binaryAdd :: String -> String -> String
+binaryAdd "" "" = "0"
+binaryAdd a b = reverse (add (reverse a) (reverse b) '0')
+  where
+    add [] [] '0' = ""
+    add [] [] '1' = "1"
+    add (x:xs) [] carry = add (x:xs) "0" carry
+    add [] (y:ys) carry = add "0" (y:ys) carry
+    add (x:xs) (y:ys) carry =
+      let (sum, newCarry) = fullAdder x y carry
+      in sum : add xs ys newCarry
+
+    fullAdder '0' '0' '0' = ('0', '0')
+    fullAdder '0' '0' '1' = ('1', '0')
+    fullAdder '0' '1' '0' = ('1', '0')
+    fullAdder '0' '1' '1' = ('0', '1')
+    fullAdder '1' '0' '0' = ('1', '0')
+    fullAdder '1' '0' '1' = ('0', '1')
+    fullAdder '1' '1' '0' = ('0', '1')
+    fullAdder '1' '1' '1' = ('1', '1')
