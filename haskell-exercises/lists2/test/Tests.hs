@@ -19,4 +19,13 @@ main = hspec $ do
       bits "" `shouldBe` []
       
 
+  describe "queens" $ do
+    it "1x1" $ do
+      queens 1 `shouldBe` [[1]]
+    it "2x2" $ do
+      queens 2 `shouldBe` []
+    it "first (8x8)" $ do
+      minimum (queens 8) `shouldBe`[1,5,8,6,3,7,2,4]
+    it "number of solutions 8x8" $ do
+      length (queens 8) `shouldBe` 92
                

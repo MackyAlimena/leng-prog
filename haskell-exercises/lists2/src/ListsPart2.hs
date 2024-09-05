@@ -17,3 +17,11 @@ bits = foldr (\c acc -> charToBits c ++ acc) []
 
 type Solution = [Int]
 
+queens :: Int -> [Solution]
+queens n = solve n
+  where
+    solve 0 = [[]]
+    solve k = [q:qs | qs <- solve (k-1), q <- [1..n], safe q qs]
+
+    safe q qs = not (q `elem` qs || sameDiag q qs)
+    sameDiag q qs = any (\(colDist, q') -> abs (q - q') == colDist) (zip [1..] qs)
