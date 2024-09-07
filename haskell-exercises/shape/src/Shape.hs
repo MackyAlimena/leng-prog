@@ -8,39 +8,54 @@ data Rectangle = Rectangle Point Point deriving (Eq, Show)
 
 -- A point from a tuple Pair
 point::(Double, Double) -> Point
-point = error "Implement it"
+point (a,b) = Point{x=a, y=b}
 
 -- The origin
 origin::Point
-origin = error "Implement it"
+origin = point (0,0)
 
 -- Rectangle from a Tuple where (x0 y0) == origin
 rectangle::(Double, Double) -> Rectangle
-rectangle = error "Implement it" 
+rectangle (a,b) = Rectangle origin Point{x=a, y=b}
 
 base::Rectangle -> Double
-base = error "Implement it"
+base (Rectangle pointA pointB) = (x pointB) - (x pointA)
 
 height::Rectangle -> Double
-height = error "Implement it"
+height (Rectangle pointA pointB) = (y pointB) - (y pointA)
+
+pointA::Rectangle -> Point
+pointA (Rectangle pointA _)= pointA
+
+pointB::Rectangle -> Point
+pointB (Rectangle _ pointB)= pointB
 
 -- Circle from radius
 circle::Double -> Circle
-circle = error "Implement it" 
+circle a = Circle origin a
 
--- Clase Shift
+-- Class Shift
 
 class Shift a where
    shift::a -> (Double, Double) -> a
    
 instance Shift Point where
-   shift  = error "Implement it"
+   shift  pt (a,b) = point (a+(x pt),b+(y pt))
    
 instance Shift Rectangle where
-   shift  = error "Implement it"
+   shift rectangle (a,b)= Rectangle (point (a,b)) (point (a+(x (pointB rectangle)),b+(y (pointB rectangle))))
    
 instance Shift Circle where
-   shift  = error "Implement it"
+   shift (Circle _ r) (a,b) = Circle (Point{x=a, y=b}) r
    
 -- Define the Surface class
+
+class Surface a where
+    surface :: a -> Double
+
+instance Surface Rectangle where
+     surface rectangle = (base rectangle) * (height rectangle)
+
+instance Surface Circle where
+      surface (Circle _ r) = pi * r * r
    
