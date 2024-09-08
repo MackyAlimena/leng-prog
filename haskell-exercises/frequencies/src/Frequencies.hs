@@ -7,13 +7,20 @@ import Data.Tuple(swap)
 type Frequency = (Int, Char)
 
 frequencies::String -> [Frequency]
-frequencies = error "Implement it"
+frequencies [] = []
+frequencies str = insertionSort $ map swap $ Map.toList $ frequencyMap str
 
 frequencyMap::(Ord a) => [a] -> Map a Int
-frequencyMap = error "Implement it"
+frequencyMap [] = Map.empty
+frequencyMap (x:xs) = Map.insert x (counter + 1) (frequencyMap xs)
+            where counter = Map.findWithDefault 0 x (frequencyMap xs)
 
 insert::(Ord a) => a -> [a] -> [a]
-insert = error "Implement it"
+insert a [] = [a]
+insert a xs = [x | x <- xs, x < a] ++ [a] ++ [x | x <- xs, x >= a]
 
 insertionSort :: (Ord a) => [a] -> [a]
-insertionSort = error "Implement it"
+insertionSort [] = []
+insertionSort [x] = [x]
+insertionSort (x:xs) = insert x (insertionSort xs)
+
