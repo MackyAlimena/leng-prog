@@ -4,6 +4,20 @@ import Data.Map(Map)
 import qualified Data.Map as Map
 import Data.Tuple(swap)
 
+import System.Environment (getArgs)
+import System.IO (readFile)
+
+main :: IO ()
+main = do
+    args <- getArgs
+    if null args
+        then putStrLn "Error: No file name provided."
+        else do
+            let fileName = head args
+            content <- readFile fileName
+            let freqList = frequencies content
+            mapM_ print (reverse freqList)
+
 type Frequency = (Int, Char)
 
 frequencies::String -> [Frequency]
@@ -23,4 +37,16 @@ insertionSort :: (Ord a) => [a] -> [a]
 insertionSort [] = []
 insertionSort [x] = [x]
 insertionSort (x:xs) = insert x (insertionSort xs)
+
+
+main :: IO ()
+main = do
+    args <- getArgs
+    if null args
+        then putStrLn "Error: No file name provided."
+        else do
+            let fileName = head args
+            content <- readFile fileName
+            let freqList = frequencies content
+            mapM_ print (reverse freqList)
 
