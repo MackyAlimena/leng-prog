@@ -39,14 +39,3 @@ insertionSort [x] = [x]
 insertionSort (x:xs) = insert x (insertionSort xs)
 
 
-main :: IO ()
-main = do
-    args <- getArgs
-    if null args
-        then putStrLn "Error: No file name provided."
-        else do
-            let fileName = head args
-            content <- readFile fileName
-            let freqList = frequencies content
-            mapM_ print (reverse freqList)
-

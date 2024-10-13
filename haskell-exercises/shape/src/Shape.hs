@@ -20,12 +20,13 @@ rectangle (a,b) = Rectangle origin Point{x=a, y=b}
 
 base::Rectangle -> Double
 base (Rectangle pointA pointB) = (x pointB) - (x pointA)
+--base rec = (x (pointB rec)) - (x (pointA rec))
 
 height::Rectangle -> Double
 height (Rectangle pointA pointB) = (y pointB) - (y pointA)
 
 pointA::Rectangle -> Point
-pointA (Rectangle pointA _)= pointA
+pointA (Rectangle a _)= a
 
 pointB::Rectangle -> Point
 pointB (Rectangle _ pointB)= pointB
