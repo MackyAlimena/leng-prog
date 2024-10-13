@@ -17,8 +17,8 @@ fn test_mul() {
      assert_eq!(result, Fraction(1, 8));
 }
 #[test]
-fn test_divide() {
-    let result = Fraction(1, 2).divide(Fraction(1, 4));
+fn test_div() {
+    let result = Fraction(1, 2).div(Fraction(1, 4));
     assert_eq!(result, Fraction(2, 1));
 }
 
